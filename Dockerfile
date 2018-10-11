@@ -22,7 +22,7 @@ WORKDIR /ircd
 
 RUN adduser -D ircd -s /bin/false ircd && \
     apk upgrade --no-cache && \
-    apk add --no-cache ca-certificates libgcc libstdc++ libssl1.0 libcrypto1.0 file
+    apk add --no-cache ca-certificates libgcc libstdc++ libssl1.0 libcrypto1.0 file tini
 
 COPY --from=builder --chown=1000 /ircd /ircd
 
@@ -30,4 +30,5 @@ USER ircd
 
 EXPOSE 6665 6666 6667 6668 6669
 
+ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["/ircd/bin/ircd", "-foreground"]
