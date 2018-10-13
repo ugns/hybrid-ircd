@@ -28,7 +28,7 @@ COPY --from=builder --chown=1000 /ircd /ircd
 
 USER ircd
 
-EXPOSE 6665 6666 6667 6668 6669
+EXPOSE 6667 6697
 
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["/ircd/bin/ircd", "-foreground"]
