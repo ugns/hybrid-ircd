@@ -8,7 +8,7 @@ RUN apk upgrade --no-cache && \
     apk add --no-cache ca-certificates libgcc libstdc++ libssl1.0 libcrypto1.0 file \
     gcc libc-dev openssl-dev make curl && \
     curl -sL https://github.com/ircd-hybrid/ircd-hybrid/archive/${HYBRID_VERSION}.tar.gz |tar xzf - && \
-    cd ircd-hybrid-* && \
+    cd ircd-hybrid-${HYBRID_VERSION} && \
     ./configure --prefix /ircd && \
     make && \
     make install
