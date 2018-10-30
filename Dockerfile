@@ -21,7 +21,7 @@ WORKDIR /ircd
 
 RUN adduser -D ircd -s /bin/false ircd && \
     apk upgrade --no-cache && \
-    apk add --no-cache ca-certificates gnutls tini
+    apk add --no-cache ca-certificates gnutls-utils tini
 
 COPY --from=builder --chown=1000 /ircd /ircd
 
