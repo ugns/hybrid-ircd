@@ -5,8 +5,7 @@ WORKDIR /build
 ARG HYBRID_VERSION=8.2.24
 
 RUN apk upgrade --no-cache && \
-    apk add --no-cache ca-certificates libssl1.0 libcrypto1.0 file \
-    gcc libc-dev openssl-dev make curl && \
+    apk add --no-cache ca-certificates file gcc libc-dev gnutls-dev make curl && \
     curl -sL https://github.com/ircd-hybrid/ircd-hybrid/archive/${HYBRID_VERSION}.tar.gz |tar xzf - && \
     cd ircd-hybrid-${HYBRID_VERSION} && \
     ./configure --prefix /ircd && \
@@ -22,7 +21,7 @@ WORKDIR /ircd
 
 RUN adduser -D ircd -s /bin/false ircd && \
     apk upgrade --no-cache && \
-    apk add --no-cache ca-certificates libssl1.0 libcrypto1.0 tini
+    apk add --no-cache ca-certificates gnutls tini
 
 COPY --from=builder --chown=1000 /ircd /ircd
 
